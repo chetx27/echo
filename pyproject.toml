@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "echo-discovery"
+version = "0.1.0"
+description = "Research infrastructure for sequential experiment selection under uncertainty."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name = "ECHO contributors"}]
+keywords = [
+  "experimental design",
+  "active learning",
+  "gaussian processes",
+  "scientific discovery",
+  "sequential decision making",
+]
+dependencies = [
+  "numpy>=1.24",
+  "scipy>=1.10",
+  "scikit-learn>=1.3",
+  "matplotlib>=3.7",
+  "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+echolab = "echo.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/"
+
+[tool.setuptools.packages.find]
+include = ["echo*", "baselines*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
