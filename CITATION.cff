@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+title: ECHO
+message: If you use this software, please cite it using these metadata.
+type: software
+abstract: >-
+  Research infrastructure for sequential experiment selection
+  under uncertainty and limited experimental budgets.
+  This is prototype software; it is not a published paper.
+license: MIT
+version: 0.1.0
+date-released: "2026-08-26"
+repository-code: ""
+authors:
+  - name: ECHO contributors
+preferred-citation:
+  type: software
+  title: "ECHO: sequential experiment selection for scientific discovery (prototype)"
+  authors:
+    - name: ECHO contributors
+  year: 2026
+  notes: >-
+    No peer-reviewed publication exists yet. Cite the software version
+    used. Update this file when a preprint or paper is available.
