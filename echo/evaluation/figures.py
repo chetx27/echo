@@ -9,10 +9,19 @@ import numpy as np
 
 ALGORITHM_STYLE = {
     "random": {"color": "#4d4d4d", "label": "Random"},
+    "greedy": {"color": "#999999", "label": "Greedy"},
     "uncertainty": {"color": "#0072B2", "label": "Uncertainty"},
+    "diversity": {"color": "#56B4E9", "label": "Diversity"},
     "expected_improvement": {"color": "#E69F00", "label": "Expected Improvement"},
+    "ucb": {"color": "#F0E442", "label": "GP-UCB"},
+    "thompson": {"color": "#CC79A7", "label": "Thompson (mean-field)"},
     "information_gain": {"color": "#009E73", "label": "Local information gain"},
     "echo_v0": {"color": "#D55E00", "label": "ECHO V0"},
+    "echo_no_hypothesis": {"color": "#D55E00", "label": "ECHO no-hypothesis"},
+    "echo_information_only": {"color": "#009E73", "label": "ECHO information-only"},
+    "echo_hypothesis": {"color": "#882255", "label": "ECHO hypothesis"},
+    "echo_falsify": {"color": "#AA4499", "label": "ECHO falsify"},
+    "echo_hypothesis_cost": {"color": "#661100", "label": "ECHO hypothesis/cost"},
 }
 
 METRIC_TITLES = {
@@ -21,6 +30,10 @@ METRIC_TITLES = {
     "parameter_recovery_rmse": "Oracle parameter RMSE (lower is better)",
     "probe_entropy": "Probe-set posterior entropy (lower is better)",
     "mean_predictive_std": "Mean predictive std",
+    "hypothesis_entropy": "Hypothesis posterior entropy (lower is better)",
+    "correct_hypothesis_prob": "P(true hypothesis | data) (higher is better)",
+    "hypothesis_identified": "Fraction identified (P(true H) ≥ 0.9)",
+    "leading_hypothesis_correct": "Leading hypothesis is true",
 }
 
 
