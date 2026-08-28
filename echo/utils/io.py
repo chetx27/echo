@@ -26,6 +26,19 @@ class ExperimentConfig:
     seed_start: int = 0
     output_dir: str = "results"
     n_restarts: int = 1
+    cost_mode: str = "uniform"
+    primary_algorithm: str = "echo_v0"
+    comparator: str = "uncertainty"
+    failure_metric: str = "function_recovery_rmse"
+    failure_higher_is_better: bool = False
+    plot_metrics: List[str] = field(
+        default_factory=lambda: [
+            "function_recovery_rmse",
+            "parameter_recovery_rmse",
+            "probe_entropy",
+            "mean_predictive_std",
+        ]
+    )
 
     def seed_list(self) -> List[int]:
         return list(range(self.seed_start, self.seed_start + self.n_seeds))
