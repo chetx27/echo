@@ -93,10 +93,24 @@ A run is recorded as a failure if ECHO V0's final function RMSE is worse than un
 
 ## Limitations (V0)
 
-- Two synthetic worlds only.
-- GP is misspecified; no discrete hypotheses yet.
-- Local IG and uncertainty are mathematically equivalent here.
+- Two synthetic worlds only (V0). V1 adds interaction and competing hypotheses.
+- GP is misspecified for nonlinear/interaction laws.
+- Local IG and uncertainty are mathematically equivalent for a homoscedastic GP.
 - EI minimizes \(y\), which may be the wrong scientific target.
 - Probe-set size and kernel family are fixed, not ablated.
 - 30 seeds is a start, not a comprehensive study.
 - No real scientific data.
+
+## V1 additions
+
+**Interaction world.** \(y = 2x_1 + 3x_2 + 5 x_1 x_3 + \varepsilon\).
+
+**Competing hypotheses.** Hidden law \(y = 1.2 x^2 + 0.5 + \varepsilon\) on \([-2,2]\). Agent vocabulary: linear, quadratic, sinusoid. \(P(H_i\mid D)\) from Gaussian marginal likelihood of Bayesian linear models.
+
+**ECHO hypothesis.** Box–Hill pairwise KL between hypothesis predictives.
+
+**ECHO falsify.** Weighted squared disagreement with the leading hypothesis.
+
+**ECHO hypothesis/cost.** Discrimination divided by cost. Cost modes: `uniform`, `radial`, `x_right`.
+
+**Additional baselines.** Greedy mean, diversity, GP-UCB (\(\mu+\kappa\sigma\)), mean-field Thompson sampling.

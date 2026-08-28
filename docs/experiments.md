@@ -32,10 +32,16 @@ python -m echo analyze --run results/first_experiment
 
 `configs/smoke.yaml` — 80 candidates, budget 6, 2 seeds. For CI and implementation checks, not for scientific claims.
 
-## Later experiments (not run in V0)
+## Second experiment (Phase 2)
 
-2. Competing hypotheses and \(P(H_i\mid D)\).
-3. Falsification-driven selection.
-4. Cost-aware discovery.
-5. Unseen environments / generalization.
-6. Retrospective ocean sampling (no ocean prototype existed in this repository at V0).
+**Config:** `configs/experiment2_hypotheses.yaml`
+
+Competing hypotheses, 2,000 1-D candidates, budget 20, 30 seeds. Compare random, uncertainty, ECHO V0, `echo_hypothesis`, and `echo_falsify` on \(P(H_{\mathrm{true}}\mid D)\) and hypothesis entropy.
+
+```bash
+python -m echo compare --config configs/experiment2_hypotheses.yaml
+```
+
+**Report:** `docs/reports/experiment2_hypotheses.md`
+
+Ablation (including cost): `configs/ablation_hypotheses.yaml`.
