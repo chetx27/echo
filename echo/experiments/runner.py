@@ -17,8 +17,8 @@ from echo.models.gp import GaussianProcessModel
 from echo.policies.acquisition_policy import AcquisitionPolicy
 from echo.policies.base import Policy
 from echo.policies.state import DecisionState
-from echo.utils.seeding import rng_for
 from echo.utils.io import ExperimentConfig
+from echo.utils.seeding import rng_for
 
 
 @dataclass
@@ -101,8 +101,9 @@ def run_sequential(
     X_arr = np.vstack(X_obs)
     y_arr = np.asarray(y_obs, dtype=float)
     model.fit(X_arr, y_arr, optimize=True, rng=gp_rng, n_restarts=config.n_restarts)
+    belief = _maybe_belief(env, config.noise, X_arr, y_arr)
     gt = env.get_ground_truth_for_evaluation()
-    metrics_over_time.append(evaluate_belief(model, X_arr, y_arr, gt, X_probe))
+    metrics_over_time.append(evaluate_belief(model, X_arr, y_arr, gt, X_probe, belief))
     hypers.append(model.hyperparameters())
 
     while len(X_obs) < config.budget:
@@ -117,6 +118,7 @@ def run_sequential(
             model=model,
             rng=policy_rng,
             X_probe=X_probe,
+            hypothesis_belief=belief,
         )
         idx = int(policy.select(state))
         if not available[idx]:
@@ -142,7 +144,9 @@ def run_sequential(
         X_arr = np.vstack(X_obs)
         y_arr = np.asarray(y_obs, dtype=float)
         model.fit(X_arr, y_arr, optimize=True, rng=gp_rng, n_restarts=config.n_restarts)
-        metrics_over_time.append(evaluate_belief(model, X_arr, y_arr, gt, X_probe))
+        if belief is not None:
+            belief.fit(X_arr, y_arr)
+        metrics_over_time.append(evaluate_belief(model, X_arr, y_arr, gt, X_probe, belief))
         hypers.append(model.hyperparameters())
 
     run_id = f"{env.name}_{policy.name}_seed{seed}_{config.config_hash()}"
@@ -160,3 +164,14 @@ def run_sequential(
         budget=config.budget,
         noise=config.noise,
     )
+
+
+def _maybe_belief(env, noise: float, X: np.ndarray, y: np.ndarray):
+    getter = getattr(env, "get_candidate_hypotheses", None)
+    if getter is None:
+        return None
+    from echo.hypotheses.belief import HypothesisBelief
+
+    belief = HypothesisBelief(getter(), noise_std=noise)
+    belief.fit(X, y)
+    return belief

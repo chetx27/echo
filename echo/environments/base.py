@@ -85,6 +85,7 @@ class SyntheticRegressionEnvironment(ScientificEnvironment):
         high: float = 2.0,
         dim: int = 3,
         cost: float = 1.0,
+        cost_mode: str = "uniform",
     ) -> None:
         self._true_fn = true_fn
         self._theta = np.asarray(theta, dtype=float)
@@ -98,6 +99,7 @@ class SyntheticRegressionEnvironment(ScientificEnvironment):
         self._high = np.full(dim, high, dtype=float)
         self._dim = int(dim)
         self._unit_cost = float(cost)
+        self.cost_mode = str(cost_mode)
         self._seed: int | None = None
         self._candidates: np.ndarray | None = None
         self._noise: np.ndarray | None = None
@@ -119,11 +121,25 @@ class SyntheticRegressionEnvironment(ScientificEnvironment):
         rng = np.random.default_rng(self._seed)
         self._candidates = self._draw_points(rng, self.n_candidates)
         self._noise = rng.normal(0.0, self.noise_std, size=self.n_candidates)
-        self._costs = np.full(self.n_candidates, self._unit_cost, dtype=float)
+        self._costs = self._make_costs(self._candidates)
         test_rng = np.random.default_rng(self._seed + 10_007)
         self._X_test = self._draw_points(test_rng, self.n_test)
         self._f_test = self._true_fn(self._X_test)
         self._queried = set()
+
+    def _make_costs(self, X: np.ndarray) -> np.ndarray:
+        n = len(X)
+        if self.cost_mode == "uniform":
+            return np.full(n, self._unit_cost, dtype=float)
+        span = np.where(self._high - self._low < 1e-12, 1.0, self._high - self._low)
+        if self.cost_mode == "radial":
+            mid = 0.5 * (self._low + self._high)
+            r = np.linalg.norm((X - mid) / span, axis=1)
+            return 1.0 + 9.0 * r
+        if self.cost_mode == "x_right":
+            u = (X[:, 0] - self._low[0]) / span[0]
+            return 1.0 + 19.0 * np.clip(u, 0.0, 1.0)
+        raise ValueError(f"unknown cost_mode {self.cost_mode!r}")
 
     def _draw_points(self, rng: np.random.Generator, n: int) -> np.ndarray:
         u = rng.random((n, self._dim))

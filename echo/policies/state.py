@@ -21,3 +21,4 @@ class DecisionState:
     model: GaussianProcessModel
     rng: np.random.Generator
     X_probe: np.ndarray
+    hypothesis_belief: object | None = None
