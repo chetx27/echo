@@ -22,7 +22,7 @@ Working contrast (to be revised as the review grows):
 
 ## Notes already filed
 
-See `docs/literature/` for structured notes. The following papers are recorded because they constrain V0, not because they are an exhaustive canon.
+See `docs/literature/` for structured notes. Added for V1: Box & Hill (1967), Thompson (1933).
 
 | Note | Why it matters for ECHO |
 | --- | --- |
