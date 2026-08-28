@@ -1,0 +1,31 @@
+name: ablation_hypotheses
+environment: competing_hypotheses
+algorithms:
+  - uncertainty
+  - echo_no_hypothesis
+  - echo_information_only
+  - echo_hypothesis
+  - echo_falsify
+  - echo_hypothesis_cost
+n_candidates: 800
+budget: 16
+n_init: 3
+noise: 0.1
+n_test: 200
+n_probe: 32
+domain_low: -2.0
+domain_high: 2.0
+n_seeds: 10
+seed_start: 0
+output_dir: results
+n_restarts: 0
+cost_mode: x_right
+primary_algorithm: echo_hypothesis
+comparator: uncertainty
+failure_metric: correct_hypothesis_prob
+failure_higher_is_better: true
+plot_metrics:
+  - correct_hypothesis_prob
+  - hypothesis_entropy
+  - function_recovery_rmse
+  - leading_hypothesis_correct
