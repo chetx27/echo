@@ -14,12 +14,12 @@ This is a hypothesis, not a claim. The infrastructure must allow the answer to b
 
 3. Does expected improvement, which seeks optima of y, recover a hidden mechanism worse than uncertainty-based design when the scientific target is the whole function rather than a minimum?
 
-## Later questions (not answered in V0)
+## Later questions (Experiment 2+)
 
-- Does hypothesis discrimination outperform generic uncertainty reduction?
-- Does actively seeking falsifying experiments improve discovery?
-- Does cost-aware scoring change the optimal policy?
-- Do strategies transfer across unseen scientific systems?
-- Can retrospective ocean sampling distinguish competing oceanographic hypotheses?
+4. Does hypothesis discrimination outperform generic uncertainty reduction on \(P(H_{\mathrm{true}}\mid D)\) and posterior entropy of \(H\)?
+5. Does a falsification-driven score (disagreement with the leading hypothesis) identify the true class faster or slower than discrimination?
+6. Does dividing discrimination by experimental cost change the selected sequence when costs are heterogeneous?
+
+Causal worlds, generalization, and ocean data remain later.
 
 See `docs/research_log.md` for dated records of actual runs.

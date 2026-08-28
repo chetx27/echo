@@ -21,6 +21,10 @@ METRIC_KEYS = [
     "parameter_recovery_rmse",
     "probe_entropy",
     "mean_predictive_std",
+    "hypothesis_entropy",
+    "correct_hypothesis_prob",
+    "hypothesis_identified",
+    "leading_hypothesis_correct",
 ]
 
 
@@ -31,6 +35,7 @@ def _env_kwargs(config: ExperimentConfig) -> dict:
         "noise_std": config.noise,
         "low": config.domain_low,
         "high": config.domain_high,
+        "cost_mode": config.cost_mode,
     }
 
 
@@ -66,17 +71,18 @@ def compare(config: ExperimentConfig, run_dir: Path | None = None) -> dict:
             result = run_one(config, algo, seed)
             save_json(runs_dir / f"{result.run_id}.json", result.to_dict())
             for metric in METRIC_KEYS:
-                values = [m[metric] for m in result.metrics]
+                values = [m.get(metric, float("nan")) for m in result.metrics]
                 series[metric][algo][s_i, :] = np.asarray(values, dtype=float)
-                finals[metric][algo].append(result.final_metrics[metric])
-            if algo == "echo_v0":
+                finals[metric][algo].append(result.final_metrics.get(metric, float("nan")))
+            if algo == config.primary_algorithm:
                 echo_runs[seed] = result
             else:
                 other_runs[seed][algo] = result
             done += 1
             print(
                 f"[{done}/{total}] {algo} seed={seed} "
-                f"function_rmse={result.final_metrics['function_recovery_rmse']:.4f}",
+                f"function_rmse={result.final_metrics.get('function_recovery_rmse', float('nan')):.4f} "
+                f"P(H*)={result.final_metrics.get('correct_hypothesis_prob', float('nan')):.3f}",
                 flush=True,
             )
 
@@ -104,31 +110,37 @@ def compare(config: ExperimentConfig, run_dir: Path | None = None) -> dict:
             }
 
     pairwise = {}
-    if "echo_v0" in config.algorithms:
+    primary = config.primary_algorithm
+    if primary in config.algorithms:
         for other in config.algorithms:
-            if other == "echo_v0":
+            if other == primary:
                 continue
-            pairwise[f"echo_v0_vs_{other}"] = {}
+            pairwise[f"{primary}_vs_{other}"] = {}
             for metric in METRIC_KEYS:
-                a = np.asarray(finals[metric]["echo_v0"], dtype=float)
+                a = np.asarray(finals[metric][primary], dtype=float)
                 b = np.asarray(finals[metric][other], dtype=float)
                 stats = pairwise_final(a, b)
                 stats["interpretation"] = (
-                    "mean_diff = echo_v0 - "
-                    f"{other}; negative means ECHO V0 is better if lower-is-better."
+                    f"mean_diff = {primary} - {other}; "
+                    "negative means the primary method is better if lower-is-better."
                 )
-                pairwise[f"echo_v0_vs_{other}"][metric] = stats
+                pairwise[f"{primary}_vs_{other}"][metric] = stats
 
     failures = []
-    comparator = "uncertainty" if "uncertainty" in config.algorithms else (
-        config.algorithms[0] if config.algorithms[0] != "echo_v0" else None
+    comparator = config.comparator if getattr(config, "comparator", None) else (
+        "uncertainty" if "uncertainty" in config.algorithms else None
     )
     if echo_runs and comparator:
         for seed, echo_result in echo_runs.items():
             other = other_runs.get(seed, {}).get(comparator)
             if other is None:
                 continue
-            if should_record_failure(echo_result.final_metrics, other.final_metrics):
+            if should_record_failure(
+                echo_result.final_metrics,
+                other.final_metrics,
+                metric=config.failure_metric,
+                higher_is_better=config.failure_higher_is_better,
+            ):
                 env = make_environment(config.environment, **_env_kwargs(config))
                 env.reset(seed)
                 hidden = env.get_hidden_state_for_evaluation()
@@ -136,6 +148,7 @@ def compare(config: ExperimentConfig, run_dir: Path | None = None) -> dict:
                     "seed": seed,
                     "environment": config.environment,
                     "comparator": comparator,
+                    "metric": config.failure_metric,
                     "echo_final": echo_result.final_metrics,
                     "comparator_final": other.final_metrics,
                     "echo_sequence": echo_result.sequence,
@@ -168,23 +181,19 @@ def compare(config: ExperimentConfig, run_dir: Path | None = None) -> dict:
         "n_failures_vs_comparator": len(failures),
         "failure_seeds": [f["seed"] for f in failures],
         "comparator": comparator,
+        "primary_algorithm": config.primary_algorithm,
+        "plot_metrics": list(config.plot_metrics),
+        "failure_metric": config.failure_metric,
     }
     save_json(run_dir / "summary.json", summary)
     _write_csv(run_dir / "metrics.csv", summary)
     _write_latex(run_dir / "table.tex", summary)
     fig_dir = Path("figures") / config.name
-    plot_discovery_curves(
-        summary,
-        [
-            "function_recovery_rmse",
-            "parameter_recovery_rmse",
-            "probe_entropy",
-            "mean_predictive_std",
-        ],
-        fig_dir / "discovery_curves.png",
-    )
-    plot_final_bars(summary, "function_recovery_rmse", fig_dir / "final_function_rmse.png")
-    plot_final_bars(summary, "parameter_recovery_rmse", fig_dir / "final_parameter_rmse.png")
+    plot_metrics = list(config.plot_metrics)
+    plot_discovery_curves(summary, plot_metrics, fig_dir / "discovery_curves.png")
+    plot_final_bars(summary, plot_metrics[0], fig_dir / "final_primary.png")
+    if len(plot_metrics) > 1:
+        plot_final_bars(summary, plot_metrics[1], fig_dir / f"final_{plot_metrics[1]}.png")
     return summary
 
 
@@ -201,11 +210,13 @@ def _write_csv(path: Path, summary: dict) -> None:
 
 
 def _write_latex(path: Path, summary: dict) -> None:
-    metric = "function_recovery_rmse"
+    metric = (summary.get("plot_metrics") or ["function_recovery_rmse"])[0]
+    if metric not in summary["final"]:
+        metric = "function_recovery_rmse"
     lines = [
         r"\begin{tabular}{lrrrr}",
         r"\hline",
-        r"Algorithm & Mean RMSE & Median & Std & 95\% CI \\",
+        r"Algorithm & Mean & Median & Std & 95\% CI \\",
         r"\hline",
     ]
     for algo, stats in summary["final"][metric].items():
@@ -226,34 +237,34 @@ def analyze_run(run_dir: Path) -> dict:
     print(f"Run: {summary['name']}  hash={summary['config_hash']}")
     print(f"Environment: {summary['environment']}  seeds={summary['n_seeds']}")
     print()
-    print(f"{'algorithm':<24} {'fn RMSE':>10} {'param RMSE':>12} {'entropy':>10}")
+    keys = [k for k in ("function_recovery_rmse", "correct_hypothesis_prob", "hypothesis_entropy") if k in summary["final"]]
+    header = f"{'algorithm':<24}" + "".join(f"{k[:12]:>14}" for k in keys)
+    print(header)
     for algo in summary["algorithms"]:
-        fn = summary["final"]["function_recovery_rmse"][algo]
-        pr = summary["final"]["parameter_recovery_rmse"][algo]
-        ent = summary["final"]["probe_entropy"][algo]
-        print(
-            f"{algo:<24} {fn['mean']:10.4f} {pr['mean']:12.4f} {ent['mean']:10.3f}"
-        )
+        row = f"{algo:<24}"
+        for k in keys:
+            row += f"{summary['final'][k][algo]['mean']:14.4f}"
+        print(row)
     if summary.get("pairwise"):
-        print("\nPairwise vs ECHO V0 (function RMSE; negative mean_diff favors ECHO):")
+        print("\nPairwise vs primary (see interpretation in JSON):")
+        metric = summary.get("failure_metric", "function_recovery_rmse")
         for key, block in summary["pairwise"].items():
-            s = block["function_recovery_rmse"]
+            if metric not in block:
+                metric = "function_recovery_rmse"
+            s = block[metric]
             print(
-                f"  {key}: mean_diff={s['mean_diff']:.4f}  d={s['cohens_d']:.3f}  "
+                f"  {key} [{metric}]: mean_diff={s['mean_diff']:.4f}  d={s['cohens_d']:.3f}  "
                 f"wilcoxon_p={s['wilcoxon_p']:.4g}  "
-                f"ECHO wins {s['a_wins']}/{s['n']}"
+                f"primary_lower_wins {s['a_wins']}/{s['n']}"
             )
     print(f"\nFailure reports vs {summary.get('comparator')}: {summary.get('n_failures_vs_comparator')}")
     fig_dir = Path("figures") / summary["name"]
-    plot_discovery_curves(
-        summary,
-        [
-            "function_recovery_rmse",
-            "parameter_recovery_rmse",
-            "probe_entropy",
-            "mean_predictive_std",
-        ],
-        fig_dir / "discovery_curves.png",
-    )
-    plot_final_bars(summary, "function_recovery_rmse", fig_dir / "final_function_rmse.png")
+    plot_metrics = summary.get("plot_metrics") or [
+        "function_recovery_rmse",
+        "parameter_recovery_rmse",
+        "probe_entropy",
+        "mean_predictive_std",
+    ]
+    plot_discovery_curves(summary, plot_metrics, fig_dir / "discovery_curves.png")
+    plot_final_bars(summary, plot_metrics[0], fig_dir / "final_primary.png")
     return summary
