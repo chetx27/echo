@@ -1,14 +1,14 @@
-"""Environment registry. Add new worlds here without changing the runner."""
-
-from __future__ import annotations
-
 from echo.environments.base import ScientificEnvironment
+from echo.environments.competing import CompetingHypothesesSystem
+from echo.environments.interaction import InteractionScientificSystem
 from echo.environments.linear import LinearScientificSystem
 from echo.environments.nonlinear import NonlinearScientificSystem
 
 _ENVIRONMENTS = {
     "linear": LinearScientificSystem,
     "nonlinear": NonlinearScientificSystem,
+    "interaction": InteractionScientificSystem,
+    "competing_hypotheses": CompetingHypothesesSystem,
 }
 
 
