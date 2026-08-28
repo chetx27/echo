@@ -13,6 +13,7 @@ def evaluate_belief(
     y_obs: np.ndarray,
     ground_truth: Dict[str, Any],
     X_probe: np.ndarray,
+    hypothesis_belief: Any = None,
 ) -> Dict[str, float]:
     """Evaluator-only metrics. Uses hidden law and oracle features."""
     X_test = ground_truth["X_test"]
@@ -40,6 +41,19 @@ def evaluate_belief(
     entropy = float(model.probe_entropy(X_probe))
     n_obs = float(len(y_obs))
 
+    hyp_entropy = float("nan")
+    correct_p = float("nan")
+    identified = float("nan")
+    leading_correct = float("nan")
+    if hypothesis_belief is not None and "true_hypothesis_index" in ground_truth:
+        post = np.asarray(hypothesis_belief.posterior(), dtype=float)
+        true_i = int(ground_truth["true_hypothesis_index"])
+        q = np.clip(post, 1e-15, 1.0)
+        hyp_entropy = float(-np.sum(q * np.log(q)))
+        correct_p = float(post[true_i])
+        identified = float(correct_p >= 0.9)
+        leading_correct = float(int(np.argmax(post)) == true_i)
+
     return {
         "n_obs": n_obs,
         "function_recovery_rmse": function_rmse,
@@ -49,4 +63,8 @@ def evaluate_belief(
         "parameter_recovery_l2": parameter_l2,
         "mean_predictive_std": mean_std,
         "probe_entropy": entropy,
+        "hypothesis_entropy": hyp_entropy,
+        "correct_hypothesis_prob": correct_p,
+        "hypothesis_identified": identified,
+        "leading_hypothesis_correct": leading_correct,
     }
