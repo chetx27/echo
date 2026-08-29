@@ -45,3 +45,53 @@ python -m echo compare --config configs/experiment2_hypotheses.yaml
 **Report:** `docs/reports/experiment2_hypotheses.md`
 
 Ablation (including cost): `configs/ablation_hypotheses.yaml`.
+
+## Third experiment (falsification)
+
+**Config:** `configs/experiment3_falsification.yaml`
+
+Same competing-hypotheses world as experiment 2. Primary algorithm: `echo_falsify`. Comparator: `echo_hypothesis`.
+
+```bash
+python -m echo compare --config configs/experiment3_falsification.yaml
+```
+
+**Report:** `docs/reports/experiment3_falsification.md` (fill from `summary.json`).
+
+## Fourth experiment (cost)
+
+**Config:** `configs/experiment4_cost.yaml`
+
+`cost_mode: x_right`. Compare un-normalized discrimination, discrimination/cost, and discrimination \(-\lambda\cdot\mathrm{cost}\).
+
+```bash
+python -m echo compare --config configs/experiment4_cost.yaml
+```
+
+**Report:** `docs/reports/experiment4_cost.md`.
+
+## Fifth experiment (unseen form)
+
+**Config:** `configs/experiment5_generalization.yaml`
+
+Unseen functional form, 10,000 candidates, budget 20, 30 seeds. Same policy set as the first experiment. This is not a learned-policy transfer test.
+
+```bash
+python -m echo compare --config configs/experiment5_generalization.yaml
+```
+
+**Report:** `docs/reports/experiment5_generalization.md`.
+
+## Causal comparison (configured, not yet a paper result)
+
+**Config:** `configs/experiment_causal.yaml`
+
+```bash
+python -m echo compare --config configs/experiment_causal.yaml
+```
+
+Smoke checks: `configs/smoke_phase3.yaml`, `configs/smoke_multimodal.yaml`, `configs/smoke_anomaly.yaml`.
+
+Cheap sweeps (5 seeds, not paper-grade): `scripts/run_noise_sweep.py`, `scripts/run_budget_sweep.py`.
+
+Task index: `python -m echo bench`.
