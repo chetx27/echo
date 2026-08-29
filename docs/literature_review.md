@@ -15,14 +15,15 @@ Working contrast (to be revised as the review grows):
 - Bayesian optimization
 - Information-theoretic exploration
 - Autonomous experimentation / robot scientists
-- Causal experimental design (later)
+- Causal experimental design
+- Active causal structure learning
+- Anomaly detection as a contrast with structured model incompleteness
 - Learned acquisition functions / adaptive design (later)
-- Scientific discovery benchmarks (later)
 - Ocean adaptive sampling (later; no ocean prototype was present in this repository)
 
 ## Notes already filed
 
-See `docs/literature/` for structured notes. Added for V1: Box & Hill (1967), Thompson (1933).
+See `docs/literature/` for structured notes. Added for V1: Box & Hill (1967), Thompson (1933). Added for V2 worlds: Pearl (2000), Eberhardt et al. (2005), Tong & Koller (2001), Chandola et al. (2009).
 
 | Note | Why it matters for ECHO |
 | --- | --- |
@@ -37,6 +38,10 @@ See `docs/literature/` for structured notes. Added for V1: Box & Hill (1967), Th
 | King et al. 2004, 2009 | Closed-loop robot scientist; hypothesis-driven wet-lab experiments |
 | Foster et al. 2021 | Amortized sequential Bayesian experimental design |
 | Wang et al. 2023 | Broad AI-for-science review; ECHO is not this paper |
+| Pearl 2000 | SCMs and interventions; framing for the causal world |
+| Eberhardt, Glymour & Scheines 2005 | How many experiments identify a graph |
+| Tong & Koller 2001 | Active learning of Bayesian-network structure |
+| Chandola, Banerjee & Kumar 2009 | Anomaly detection survey; contrast with structured incompleteness |
 
 ## Gaps to investigate (not assumed empty)
 
@@ -45,7 +50,7 @@ See `docs/literature/` for structured notes. Added for V1: Box & Hill (1967), Th
 3. Does global entropy reduction recover mechanisms better than optimum-seeking (EI)?
 4. When do these objectives disagree?
 
-Hypothesis-aware policies, falsification, cost, causal worlds, and real data are out of scope for this review's experimental claims until those experiments exist.
+Hypothesis-aware policies and cost wrappers are implemented; their experimental claims wait on experiments 2–4 summaries. Causal, multimodal, anomaly, and unseen worlds are implemented; their claims wait on those summaries. Ocean data is still out of scope.
 
 ## Citation practice
 

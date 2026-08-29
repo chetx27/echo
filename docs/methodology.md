@@ -114,3 +114,25 @@ A run is recorded as a failure if ECHO V0's final function RMSE is worse than un
 **ECHO hypothesis/cost.** Discrimination divided by cost. Cost modes: `uniform`, `radial`, `x_right`.
 
 **Additional baselines.** Greedy mean, diversity, GP-UCB (\(\mu+\kappa\sigma\)), mean-field Thompson sampling.
+
+## V2 worlds
+
+**Causal.** Hidden SCM \(A\to C\to D\), \(B\to C\). Candidates are \(\mathrm{do}(A=a,B=b)\); the agent observes \(D\). Evaluator-only exhaustive Gaussian BIC recovers parent sets; the metric is structural Hamming distance. This is not a new identification algorithm.
+
+**Multimodal.** Three regions of \(x_1\) hide different mechanisms. Metrics: region coverage and mean per-region RMSE.
+
+**Anomaly.** Linear background plus a compact box with a structured \(+4\) offset. Metrics: hit rate and recall of queries inside the box.
+
+**Unseen.** \(y = 2\exp(-x_1^2)+0.5 x_2 x_3-\tanh(x_3)+\varepsilon\). Used to test whether hand-designed policy rankings transfer; nothing is meta-learned.
+
+**Open-loop ablation.** `echo_no_sequential` ranks remaining candidates once after the initial design.
+
+**ECHO-Bench.** `echo.bench` lists tasks and config paths. It is a local registry, not a community benchmark.
+
+## Limitations (V2 infrastructure)
+
+- Causal world intervenes on both roots together, not on a chosen single target.
+- Graph recovery uses a tiny exhaustive BIC, which can be unstable at budget 20.
+- Anomaly recall depends on how many box candidates the seed happened to draw.
+- Experiments 3–5 and the causal comparison are configured; numbers are not claimed until `summary.json` exists.
+- Still no real scientific data.

@@ -20,6 +20,14 @@ This is a hypothesis, not a claim. The infrastructure must allow the answer to b
 5. Does a falsification-driven score (disagreement with the leading hypothesis) identify the true class faster or slower than discrimination?
 6. Does dividing discrimination by experimental cost change the selected sequence when costs are heterogeneous?
 
-Causal worlds, generalization, and ocean data remain later.
+## Phase 3–5 questions (infrastructure ready; claims wait on summaries)
+
+7. Under a hidden four-node linear Gaussian SCM and hard \(\mathrm{do}(A,B)\) experiments, which sequential policy recovers the graph (structural Hamming distance) more efficiently?
+8. On a landscape with three distinct mechanisms, does uncertainty-style design visit all regions or lock onto one?
+9. When most of the domain obeys a linear law but a compact box does not, does sequential design find that structured violation?
+10. Do the Phase-1 policy rankings hold on an unused functional form?
+11. Does open-loop scoring (no sequential re-ranking) match sequential ECHO V0 under the same budget?
+
+Ocean retrospective sampling remains later. No policy in this repository is trained across environments.
 
 See `docs/research_log.md` for dated records of actual runs.

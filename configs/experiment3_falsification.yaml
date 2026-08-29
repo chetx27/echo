@@ -1,0 +1,30 @@
+name: experiment3_falsification
+environment: competing_hypotheses
+algorithms:
+  - random
+  - uncertainty
+  - echo_hypothesis
+  - echo_falsify
+  - echo_no_sequential
+n_candidates: 2000
+budget: 20
+n_init: 3
+noise: 0.1
+n_test: 400
+n_probe: 64
+domain_low: -2.0
+domain_high: 2.0
+n_seeds: 30
+seed_start: 0
+output_dir: results
+n_restarts: 1
+cost_mode: uniform
+primary_algorithm: echo_falsify
+comparator: echo_hypothesis
+failure_metric: correct_hypothesis_prob
+failure_higher_is_better: true
+plot_metrics:
+  - correct_hypothesis_prob
+  - hypothesis_entropy
+  - function_recovery_rmse
+  - leading_hypothesis_correct

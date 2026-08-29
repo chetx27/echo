@@ -2,7 +2,7 @@
 
 Research infrastructure for **sequential experiment selection** under uncertainty and limited experimental budgets.
 
-**Status:** prototype / experimental research code (Phase 1–2).
+**Status:** prototype / experimental research code (Phase 1–3 infrastructure).
 
 This is not a product, not an LLM agent, and not a claim that an AI can do science. It is a computational laboratory for asking a precise question:
 
@@ -28,12 +28,12 @@ Can an experiment-selection policy recover a hidden scientific mechanism more ef
 
 The answer is not assumed to be yes.
 
-## Approach (V0–V1)
+## Approach (V0–V2)
 
 1. Represent unknown systems as synthetic scientific environments with hidden laws.
 2. Give the agent candidate experiments, noisy observations, and a budget. Ground truth is reserved for evaluation.
 3. Maintain a Gaussian process posterior over the unknown function, and (V1) a posterior over explicit parametric hypotheses when the environment provides a candidate class list.
-4. Select experiments **sequentially**, updating after every observation.
+4. Select experiments **sequentially**, updating after every observation. An open-loop ablation scores once and does not re-rank.
 5. Compare policies on **several** discovery metrics, not one.
 
 No language model is used.
@@ -45,12 +45,14 @@ No language model is used.
 | Environment interface | implemented |
 | Linear, nonlinear, interaction worlds | implemented |
 | Competing-hypotheses world | implemented (experiment 2) |
+| Causal SCM, multimodal, anomaly, unseen worlds | implemented |
 | Exact Gaussian process | implemented |
 | Random, greedy, uncertainty, diversity, EI, UCB, Thompson, local IG | implemented |
 | ECHO V0 (global expected knowledge change) | implemented |
-| ECHO hypothesis / falsify / cost | implemented |
+| ECHO hypothesis / falsify / cost / penalty / open-loop | implemented |
 | Sequential loop, multi-metric evaluation, failure reports | implemented |
-| Causal graphs, real data, LLM layer | not implemented |
+| ECHO-Bench task registry | local index only; not a published benchmark |
+| Real data, LLM layer | not implemented |
 
 ## Reproduce the first experiment
 
@@ -76,6 +78,8 @@ Hypothesis smoke test:
 
 ```bash
 python -m echo compare --config configs/smoke_hypotheses.yaml
+python -m echo compare --config configs/smoke_phase3.yaml
+python -m echo bench
 ```
 
 The first experiment (see `configs/first_experiment.yaml`) uses the nonlinear hidden system, 10,000 candidates, budget 20, noise 0.1, and 30 seeds. It compares random sampling, uncertainty sampling, expected improvement, local information gain, and ECHO V0.
