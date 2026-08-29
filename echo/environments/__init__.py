@@ -1,14 +1,22 @@
+from echo.environments.anomaly import AnomalyScientificSystem
 from echo.environments.base import ScientificEnvironment
+from echo.environments.causal import CausalScientificSystem
 from echo.environments.competing import CompetingHypothesesSystem
 from echo.environments.interaction import InteractionScientificSystem
 from echo.environments.linear import LinearScientificSystem
+from echo.environments.multimodal import MultimodalScientificSystem
 from echo.environments.nonlinear import NonlinearScientificSystem
+from echo.environments.unseen import UnseenScientificSystem
 
 _ENVIRONMENTS = {
     "linear": LinearScientificSystem,
     "nonlinear": NonlinearScientificSystem,
     "interaction": InteractionScientificSystem,
     "competing_hypotheses": CompetingHypothesesSystem,
+    "causal": CausalScientificSystem,
+    "multimodal": MultimodalScientificSystem,
+    "anomaly": AnomalyScientificSystem,
+    "unseen": UnseenScientificSystem,
 }
 
 

@@ -25,6 +25,15 @@ METRIC_KEYS = [
     "correct_hypothesis_prob",
     "hypothesis_identified",
     "leading_hypothesis_correct",
+    "structural_hamming_distance",
+    "parent_set_f1",
+    "region_coverage",
+    "mean_region_rmse",
+    "anomaly_hit_rate",
+    "anomaly_recall",
+    "total_cost",
+    "cost_efficiency_rmse",
+    "discovery_efficiency_rmse",
 ]
 
 

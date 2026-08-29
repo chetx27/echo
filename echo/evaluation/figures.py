@@ -22,6 +22,8 @@ ALGORITHM_STYLE = {
     "echo_hypothesis": {"color": "#882255", "label": "ECHO hypothesis"},
     "echo_falsify": {"color": "#AA4499", "label": "ECHO falsify"},
     "echo_hypothesis_cost": {"color": "#661100", "label": "ECHO hypothesis/cost"},
+    "echo_hypothesis_penalty": {"color": "#332288", "label": "ECHO hypothesis−λ cost"},
+    "echo_no_sequential": {"color": "#888888", "label": "ECHO open-loop"},
 }
 
 METRIC_TITLES = {
@@ -34,6 +36,15 @@ METRIC_TITLES = {
     "correct_hypothesis_prob": "P(true hypothesis | data) (higher is better)",
     "hypothesis_identified": "Fraction identified (P(true H) ≥ 0.9)",
     "leading_hypothesis_correct": "Leading hypothesis is true",
+    "structural_hamming_distance": "Structural Hamming distance (lower is better)",
+    "parent_set_f1": "Parent-set F1 (higher is better)",
+    "region_coverage": "Fraction of mechanism regions visited",
+    "mean_region_rmse": "Mean per-region RMSE (lower is better)",
+    "anomaly_hit_rate": "Fraction of queries in the anomaly box",
+    "anomaly_recall": "Anomaly-box recall (higher is better)",
+    "total_cost": "Cumulative experimental cost",
+    "cost_efficiency_rmse": "Function RMSE / cumulative cost",
+    "discovery_efficiency_rmse": "Function RMSE / number of experiments",
 }
 
 

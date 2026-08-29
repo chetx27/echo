@@ -14,7 +14,6 @@ import numpy as np
 from echo.environments.base import ScientificEnvironment
 from echo.evaluation.metrics import evaluate_belief
 from echo.models.gp import GaussianProcessModel
-from echo.policies.acquisition_policy import AcquisitionPolicy
 from echo.policies.base import Policy
 from echo.policies.state import DecisionState
 from echo.utils.io import ExperimentConfig
@@ -103,7 +102,9 @@ def run_sequential(
     model.fit(X_arr, y_arr, optimize=True, rng=gp_rng, n_restarts=config.n_restarts)
     belief = _maybe_belief(env, config.noise, X_arr, y_arr)
     gt = env.get_ground_truth_for_evaluation()
-    metrics_over_time.append(evaluate_belief(model, X_arr, y_arr, gt, X_probe, belief))
+    metrics_over_time.append(
+        _with_cost(evaluate_belief(model, X_arr, y_arr, gt, X_probe, belief), sequence)
+    )
     hypers.append(model.hyperparameters())
 
     while len(X_obs) < config.budget:
@@ -124,8 +125,9 @@ def run_sequential(
         if not available[idx]:
             raise RuntimeError(f"{policy.name} selected an unavailable candidate {idx}")
         score = None
-        if isinstance(policy, AcquisitionPolicy) and policy.last_scores is not None:
-            score = float(policy.last_scores[idx])
+        last_scores = getattr(policy, "last_scores", None)
+        if last_scores is not None:
+            score = float(last_scores[idx])
         outcome = env.perform_experiment(idx)
         available[idx] = False
         X_obs.append(outcome.x)
@@ -146,7 +148,10 @@ def run_sequential(
         model.fit(X_arr, y_arr, optimize=True, rng=gp_rng, n_restarts=config.n_restarts)
         if belief is not None:
             belief.fit(X_arr, y_arr)
-        metrics_over_time.append(evaluate_belief(model, X_arr, y_arr, gt, X_probe, belief))
+        gt = env.get_ground_truth_for_evaluation()
+        metrics_over_time.append(
+            _with_cost(evaluate_belief(model, X_arr, y_arr, gt, X_probe, belief), sequence)
+        )
         hypers.append(model.hyperparameters())
 
     run_id = f"{env.name}_{policy.name}_seed{seed}_{config.config_hash()}"
@@ -164,6 +169,20 @@ def run_sequential(
         budget=config.budget,
         noise=config.noise,
     )
+
+
+def _with_cost(metrics: Dict[str, float], sequence: List[Dict[str, Any]]) -> Dict[str, float]:
+    total = float(sum(float(step["cost"]) for step in sequence))
+    metrics["total_cost"] = total
+    rmse = metrics.get("function_recovery_rmse", float("nan"))
+    n_obs = metrics.get("n_obs", float("nan"))
+    metrics["cost_efficiency_rmse"] = (
+        float(rmse / max(total, 1e-12)) if rmse == rmse else float("nan")
+    )
+    metrics["discovery_efficiency_rmse"] = (
+        float(rmse / max(float(n_obs), 1e-12)) if rmse == rmse and n_obs == n_obs else float("nan")
+    )
+    return metrics
 
 
 def _maybe_belief(env, noise: float, X: np.ndarray, y: np.ndarray):
