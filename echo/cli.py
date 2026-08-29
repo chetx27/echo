@@ -1,4 +1,4 @@
-"""Command-line interface: python -m echo <run|compare|analyze>.
+"""Command-line interface: python -m echo <run|compare|analyze|bench>.
 
 The Unix command `echo` is a shell builtin. Use `python -m echo` or `echolab`.
 """
@@ -37,10 +37,24 @@ def main(argv: list[str] | None = None) -> int:
     p_an = sub.add_parser("analyze", help="Summarize a completed run directory.")
     p_an.add_argument("--run", required=True, help="Path to results/<name>/")
 
+    sub.add_parser("bench", help="List local ECHO-Bench tasks (not a published benchmark).")
+
     args = parser.parse_args(argv)
 
     if args.command == "analyze":
         analyze_run(Path(args.run))
+        return 0
+
+    if args.command == "bench":
+        from echo.bench import available_tasks, get_task
+
+        print(f"{'task':<24}{'environment':<24}{'metric':<32}config")
+        for name in available_tasks():
+            task = get_task(name)
+            print(
+                f"{task.name:<24}{task.environment:<24}"
+                f"{task.primary_metric:<32}{task.config_path}"
+            )
         return 0
 
     config = _config_from_args(args)

@@ -1,0 +1,26 @@
+name: noise_sweep
+environment: nonlinear
+algorithms:
+  - random
+  - uncertainty
+  - echo_v0
+n_candidates: 400
+budget: 12
+n_init: 3
+noise: 0.1
+n_test: 80
+n_probe: 32
+domain_low: -2.0
+domain_high: 2.0
+n_seeds: 5
+seed_start: 0
+output_dir: results
+n_restarts: 0
+cost_mode: uniform
+primary_algorithm: echo_v0
+comparator: uncertainty
+failure_metric: function_recovery_rmse
+failure_higher_is_better: false
+plot_metrics:
+  - function_recovery_rmse
+  - probe_entropy

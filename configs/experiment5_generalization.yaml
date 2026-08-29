@@ -1,0 +1,30 @@
+name: experiment5_generalization
+environment: unseen
+algorithms:
+  - random
+  - uncertainty
+  - expected_improvement
+  - information_gain
+  - echo_v0
+n_candidates: 10000
+budget: 20
+n_init: 3
+noise: 0.1
+n_test: 1000
+n_probe: 256
+domain_low: -2.0
+domain_high: 2.0
+n_seeds: 30
+seed_start: 0
+output_dir: results
+n_restarts: 1
+cost_mode: uniform
+primary_algorithm: echo_v0
+comparator: uncertainty
+failure_metric: function_recovery_rmse
+failure_higher_is_better: false
+plot_metrics:
+  - function_recovery_rmse
+  - parameter_recovery_rmse
+  - probe_entropy
+  - mean_predictive_std

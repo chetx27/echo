@@ -18,14 +18,16 @@ def available_algorithms() -> list[str]:
             "echo_hypothesis",
             "echo_falsify",
             "echo_hypothesis_cost",
+            "echo_hypothesis_penalty",
             "echo_no_hypothesis",
             "echo_information_only",
+            "echo_no_sequential",
         ]
     )
 
 
 def make_policy(name: str) -> Policy:
-    from echo.acquisition.cost_aware import per_cost
+    from echo.acquisition.cost_aware import minus_lambda_cost, per_cost
     from echo.acquisition.diversity import diversity_score
     from echo.acquisition.echo_v0 import echo_v0_score
     from echo.acquisition.expected_improvement import expected_improvement
@@ -37,6 +39,7 @@ def make_policy(name: str) -> Policy:
     from echo.acquisition.ucb import gp_ucb
     from echo.acquisition.uncertainty import predictive_uncertainty
     from echo.policies.acquisition_policy import AcquisitionPolicy
+    from echo.policies.batch import OpenLoopPolicy
     from echo.policies.random_policy import RandomPolicy
 
     policies = {
@@ -64,6 +67,10 @@ def make_policy(name: str) -> Policy:
         "echo_hypothesis_cost": lambda: AcquisitionPolicy(
             "echo_hypothesis_cost", per_cost(hypothesis_discrimination)
         ),
+        "echo_hypothesis_penalty": lambda: AcquisitionPolicy(
+            "echo_hypothesis_penalty", minus_lambda_cost(hypothesis_discrimination)
+        ),
+        "echo_no_sequential": lambda: OpenLoopPolicy("echo_no_sequential", echo_v0_score),
     }
     if name not in policies:
         known = ", ".join(available_algorithms())

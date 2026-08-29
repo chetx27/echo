@@ -1,4 +1,4 @@
-from echo.acquisition.cost_aware import per_cost
+from echo.acquisition.cost_aware import minus_lambda_cost, per_cost
 from echo.acquisition.diversity import diversity_score
 from echo.acquisition.echo_v0 import echo_v0_score
 from echo.acquisition.expected_improvement import expected_improvement
@@ -23,6 +23,7 @@ __all__ = [
     "gp_ucb",
     "hypothesis_discrimination",
     "local_information_gain",
+    "minus_lambda_cost",
     "per_cost",
     "predictive_uncertainty",
     "thompson_meanfield",

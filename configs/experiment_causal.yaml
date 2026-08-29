@@ -1,0 +1,30 @@
+name: experiment_causal
+environment: causal
+algorithms:
+  - random
+  - uncertainty
+  - diversity
+  - echo_v0
+  - echo_no_sequential
+n_candidates: 2000
+budget: 20
+n_init: 3
+noise: 0.1
+n_test: 400
+n_probe: 64
+domain_low: -2.0
+domain_high: 2.0
+n_seeds: 30
+seed_start: 0
+output_dir: results
+n_restarts: 1
+cost_mode: uniform
+primary_algorithm: echo_v0
+comparator: uncertainty
+failure_metric: structural_hamming_distance
+failure_higher_is_better: false
+plot_metrics:
+  - structural_hamming_distance
+  - parent_set_f1
+  - function_recovery_rmse
+  - probe_entropy
