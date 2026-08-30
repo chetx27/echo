@@ -2,7 +2,7 @@
 
 Research infrastructure for **sequential experiment selection** under uncertainty and limited experimental budgets.
 
-**Status:** prototype / experimental research code (Phase 1–3 infrastructure).
+**Status:** prototype / experimental research code.
 
 This is not a product, not an LLM agent, and not a claim that an AI can do science. It is a computational laboratory for asking a precise question:
 
@@ -95,7 +95,3 @@ Do not treat this repository as evidence that ECHO is a better scientist. Treat 
 ## Citation
 
 There is no paper yet. Use `CITATION.cff` to cite the software version. When a preprint exists, that file will be updated.
-
-## License
-
-MIT. See `LICENSE`.
