@@ -20,3 +20,7 @@ Location: `results/<run>/failures/seed_<k>.json`
 The first write of this experiment stored `n_failures_vs_comparator: 0` because failure collection looked up `"echo_v0"` in a dict keyed by integer seed. Trajectories were intact. Reports were rebuilt from `results/first_experiment/runs/` after fixing `echo/experiments/compare.py`.
 
 Do not delete these records.
+
+## Other 30-seed runs (2026-09-01)
+
+Failure files exist under `results/<run>/failures/` for causal, multimodal, anomaly, and unseen-form comparisons. The metric is the run's `failure_metric`, not always function RMSE. Experiment 7 is the sharp case: uncertainty-style policies query the anomaly box less than random.

@@ -28,6 +28,8 @@ This is a hypothesis, not a claim. The infrastructure must allow the answer to b
 10. Do the Phase-1 policy rankings hold on an unused functional form?
 11. Does open-loop scoring (no sequential re-ranking) match sequential ECHO V0 under the same budget?
 
+Answers as of 2026-09-01 (see `docs/reports/` and `docs/research_log.md`): (7) SHD does not stably rank policies; (8) all methods visit all three regions; (9) random finds the box more than uncertainty/ECHO V0; (10) EI/random ranking held, ECHO vs uncertainty is no longer a tie; (11) open-loop wrecks surface RMSE on the hypothesis world (0.64 vs ~0.07).
+
 Ocean retrospective sampling remains later. No policy in this repository is trained across environments.
 
 See `docs/research_log.md` for dated records of actual runs.

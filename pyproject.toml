@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "echo-discovery"
-version = "0.1.0"
+version = "0.2.0"
 description = "Research infrastructure for sequential experiment selection under uncertainty."
 readme = "README.md"
 requires-python = ">=3.9"

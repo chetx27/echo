@@ -28,6 +28,8 @@ python -m echo analyze --run results/first_experiment
 
 **Headline (not a claim of superiority):** EI recovered the hidden surface substantially worse than uncertainty-style design. ECHO V0 was statistically tied with uncertainty sampling on function RMSE (30 seeds).
 
+Remaining 30-seed runs (2026-09-01) are in `docs/reports/`. Short version: competing-hypothesis identification saturates for every policy; cost wrappers change spend not \(P(H_{\mathrm{true}})\); causal SHD does not rank designs; multimodal coverage is complete for all methods with diversity best on region RMSE; the anomaly box is found more often by **random** than by uncertainty/ECHO V0; on the unseen form ECHO V0 beat uncertainty at \(p=0.036\) (19/30) while EI stayed worst.
+
 ## Smoke test
 
 `configs/smoke.yaml` — 80 candidates, budget 6, 2 seeds. For CI and implementation checks, not for scientific claims.
@@ -82,16 +84,48 @@ python -m echo compare --config configs/experiment5_generalization.yaml
 
 **Report:** `docs/reports/experiment5_generalization.md`.
 
-## Causal comparison (configured, not yet a paper result)
+## Sixth experiment (multimodal regions)
+
+**Config:** `configs/experiment6_multimodal.yaml`
+
+Three piecewise mechanisms in \(x_1\). Primary metric: mean per-region RMSE. Also report region coverage.
+
+```bash
+python -m echo compare --config configs/experiment6_multimodal.yaml --jobs 4
+```
+
+**Report:** `docs/reports/experiment6_multimodal.md`.
+
+## Seventh experiment (anomaly box)
+
+**Config:** `configs/experiment7_anomaly.yaml`
+
+Linear background plus a compact structured offset. Primary metric: anomaly-box recall.
+
+```bash
+python -m echo compare --config configs/experiment7_anomaly.yaml --jobs 4
+```
+
+**Report:** `docs/reports/experiment7_anomaly.md`.
+
+## Causal comparison
 
 **Config:** `configs/experiment_causal.yaml`
 
 ```bash
-python -m echo compare --config configs/experiment_causal.yaml
+python -m echo compare --config configs/experiment_causal.yaml --jobs 4
 ```
 
-Smoke checks: `configs/smoke_phase3.yaml`, `configs/smoke_multimodal.yaml`, `configs/smoke_anomaly.yaml`.
+**Report:** `docs/reports/experiment_causal.md`.
+
+## Custom systems
+
+See `docs/using_echo.md`. Minimal example: `examples/oscillator.py` and `configs/example_oscillator.yaml`.
+
+Smoke checks: `configs/smoke.yaml`, `configs/smoke_hypotheses.yaml`, `configs/smoke_phase3.yaml`, `configs/smoke_multimodal.yaml`, `configs/smoke_anomaly.yaml`.
 
 Cheap sweeps (5 seeds, not paper-grade): `scripts/run_noise_sweep.py`, `scripts/run_budget_sweep.py`.
 
 Task index: `python -m echo bench`.
+
+`compare` resumes completed seed/algorithm trajectories. Use `--no-resume` to force a rerun.

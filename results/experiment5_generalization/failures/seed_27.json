@@ -1,0 +1,315 @@
+{
+  "seed": 27,
+  "environment": "unseen",
+  "comparator": "uncertainty",
+  "metric": "function_recovery_rmse",
+  "echo_final": {
+    "n_obs": 20.0,
+    "function_recovery_rmse": 0.4247748798449247,
+    "prediction_error": 0.4247748798449247,
+    "prediction_mae": 0.3275071235529702,
+    "parameter_recovery_rmse": 0.020569627765503178,
+    "parameter_recovery_l2": 0.03562764038263098,
+    "mean_predictive_std": 0.24615661542544062,
+    "probe_entropy": -1125.0806205056751,
+    "hypothesis_entropy": NaN,
+    "correct_hypothesis_prob": NaN,
+    "hypothesis_identified": NaN,
+    "leading_hypothesis_correct": NaN,
+    "structural_hamming_distance": NaN,
+    "parent_set_f1": NaN,
+    "region_coverage": NaN,
+    "mean_region_rmse": NaN,
+    "anomaly_hit_rate": NaN,
+    "anomaly_recall": NaN,
+    "total_cost": 20.0,
+    "cost_efficiency_rmse": 0.021238743992246234,
+    "discovery_efficiency_rmse": 0.021238743992246234
+  },
+  "comparator_final": {
+    "n_obs": 20.0,
+    "function_recovery_rmse": 0.3944815363577174,
+    "prediction_error": 0.3944815363577174,
+    "prediction_mae": 0.3073149331953126,
+    "parameter_recovery_rmse": 0.03957276206375815,
+    "parameter_recovery_l2": 0.06854203449026335,
+    "mean_predictive_std": 0.47737401094536075,
+    "probe_entropy": -1174.5348493430706,
+    "hypothesis_entropy": NaN,
+    "correct_hypothesis_prob": NaN,
+    "hypothesis_identified": NaN,
+    "leading_hypothesis_correct": NaN,
+    "structural_hamming_distance": NaN,
+    "parent_set_f1": NaN,
+    "region_coverage": NaN,
+    "mean_region_rmse": NaN,
+    "anomaly_hit_rate": NaN,
+    "anomaly_recall": NaN,
+    "total_cost": 20.0,
+    "cost_efficiency_rmse": 0.01972407681788587,
+    "discovery_efficiency_rmse": 0.01972407681788587
+  },
+  "echo_sequence": [
+    {
+      "step": 1,
+      "index": 564,
+      "x": [
+        -0.7780995672815751,
+        0.1983128405925516,
+        1.4870776475154646
+      ],
+      "y": 0.3387762520055951,
+      "cost": 1.0,
+      "phase": "init",
+      "acquisition_score": null
+    },
+    {
+      "step": 2,
+      "index": 8444,
+      "x": [
+        -0.9356865257575828,
+        1.1195975895309687,
+        1.3416005640842177
+      ],
+      "y": 0.5903255670389309,
+      "cost": 1.0,
+      "phase": "init",
+      "acquisition_score": null
+    },
+    {
+      "step": 3,
+      "index": 4031,
+      "x": [
+        -1.258960092292353,
+        -1.7930815010216308,
+        -0.48487793359362596
+      ],
+      "y": 1.2765110233574548,
+      "cost": 1.0,
+      "phase": "init",
+      "acquisition_score": null
+    },
+    {
+      "step": 4,
+      "index": 5217,
+      "x": [
+        0.3815992874873628,
+        1.198433284975298,
+        -0.8773858027133019
+      ],
+      "y": 1.7064863719802903,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 4.6148912676090195
+    },
+    {
+      "step": 5,
+      "index": 9946,
+      "x": [
+        1.6729794886393305,
+        -1.747911065827596,
+        -0.3802212390335651
+      ],
+      "y": 0.9670938137167875,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.0553876314546144
+    },
+    {
+      "step": 6,
+      "index": 7557,
+      "x": [
+        1.714687306927836,
+        1.9518924454832698,
+        1.5281411437714612
+      ],
+      "y": 0.8615729007894435,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 4.939664459806658
+    },
+    {
+      "step": 7,
+      "index": 2992,
+      "x": [
+        -1.9500959349969227,
+        0.5843561069835155,
+        -0.9702480766958388
+      ],
+      "y": 0.3627265272854314,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 4.794327733798828
+    },
+    {
+      "step": 8,
+      "index": 5671,
+      "x": [
+        1.2004989261922123,
+        -0.26522147203702584,
+        0.8926032793538554
+      ],
+      "y": -0.4406912493814927,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 4.785348966138445
+    },
+    {
+      "step": 9,
+      "index": 3388,
+      "x": [
+        -0.22419713367753946,
+        -0.947446381266905,
+        -1.2088897397433818
+      ],
+      "y": 3.4896569659681744,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.029019869735643
+    },
+    {
+      "step": 10,
+      "index": 7769,
+      "x": [
+        -1.569830297295324,
+        1.8056830813403058,
+        -0.17232170952282466
+      ],
+      "y": 0.16678484979521802,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.48743348821844
+    },
+    {
+      "step": 11,
+      "index": 5912,
+      "x": [
+        1.7102039217541969,
+        1.6092559393670043,
+        -0.6490934019188832
+      ],
+      "y": 0.12180203284944766,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.453654436675819
+    },
+    {
+      "step": 12,
+      "index": 8253,
+      "x": [
+        1.3393950617872394,
+        -0.4325753763970974,
+        -1.3580480886646327
+      ],
+      "y": 1.4633147719188657,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.410795041153313
+    },
+    {
+      "step": 13,
+      "index": 6150,
+      "x": [
+        -0.24036980248685724,
+        -1.1538015642130883,
+        0.7857547207754307
+      ],
+      "y": 0.7492526401435868,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.359223169427891
+    },
+    {
+      "step": 14,
+      "index": 3439,
+      "x": [
+        -1.7089611259006112,
+        -0.6551355841256585,
+        1.0202089900553735
+      ],
+      "y": -1.1153890073763437,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.297210683197553
+    },
+    {
+      "step": 15,
+      "index": 9965,
+      "x": [
+        0.4254843042291112,
+        -1.8976325105921874,
+        -1.6785910011946927
+      ],
+      "y": 4.261253713762391,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.364450286956042
+    },
+    {
+      "step": 16,
+      "index": 8000,
+      "x": [
+        -1.496455191230801,
+        1.9179976293760177,
+        -1.8873400041961315
+      ],
+      "y": -0.6405096080388114,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.450802177237386
+    },
+    {
+      "step": 17,
+      "index": 9100,
+      "x": [
+        1.8894911937354917,
+        1.5432856676240831,
+        -1.9994622843395575
+      ],
+      "y": -0.32052264529292107,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.467698543340718
+    },
+    {
+      "step": 18,
+      "index": 1517,
+      "x": [
+        0.8511767449460601,
+        -1.4424457148277052,
+        1.8520102398486578
+      ],
+      "y": -1.40373235530197,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.369483845213179
+    },
+    {
+      "step": 19,
+      "index": 9129,
+      "x": [
+        -1.3910292383045566,
+        -1.9170330990375652,
+        1.5785620091640338
+      ],
+      "y": -2.1953541629472295,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.2888122614180615
+    },
+    {
+      "step": 20,
+      "index": 5759,
+      "x": [
+        -1.7940340683991494,
+        -1.8761473984812351,
+        -1.6856312247877696
+      ],
+      "y": 2.4682076552207532,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.18686778133356
+    }
+  ],
+  "note": "ECHO V0 ended with higher function RMSE (0.4248) than uncertainty (0.3945). Hidden law for evaluation: y = 2*exp(-x1**2) + 0.5*x2*x3 - tanh(x3) + eps."
+}

@@ -134,5 +134,7 @@ A run is recorded as a failure if ECHO V0's final function RMSE is worse than un
 - Causal world intervenes on both roots together, not on a chosen single target.
 - Graph recovery uses a tiny exhaustive BIC, which can be unstable at budget 20.
 - Anomaly recall depends on how many box candidates the seed happened to draw.
-- Experiments 3–5 and the causal comparison are configured; numbers are not claimed until `summary.json` exists.
-- Still no real scientific data.
+- Competing-hypotheses identification saturates by mid-budget on the V1 1-D world; discrimination rankings need a harder class overlap.
+- Causal SHD uses a tiny exhaustive BIC and does not stably rank policies at budget 20.
+- Uncertainty / ECHO V0 under-sample the anomaly box relative to random.
+- Still no real scientific data (CSV/tabular worlds exist as an interface, not as a published dataset).

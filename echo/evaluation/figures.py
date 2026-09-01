@@ -97,9 +97,9 @@ def plot_discovery_curves(
 def plot_final_bars(summary: dict, metric: str, output_path: Path) -> None:
     algorithms = summary["algorithms"]
     final = summary["final"][metric]
-    means = [final[a]["mean"] for a in algorithms]
-    lows = [final[a]["ci_low"] for a in algorithms]
-    highs = [final[a]["ci_high"] for a in algorithms]
+    means = [float(final[a]["mean"]) for a in algorithms]
+    lows = [float(final[a]["ci_low"]) for a in algorithms]
+    highs = [float(final[a]["ci_high"]) for a in algorithms]
     colors = [ALGORITHM_STYLE.get(a, {}).get("color", "C0") for a in algorithms]
     labels = [ALGORITHM_STYLE.get(a, {}).get("label", a) for a in algorithms]
     yerr = np.vstack([np.asarray(means) - np.asarray(lows), np.asarray(highs) - np.asarray(means)])

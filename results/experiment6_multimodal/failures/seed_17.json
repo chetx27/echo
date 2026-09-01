@@ -1,0 +1,295 @@
+{
+  "seed": 17,
+  "environment": "multimodal",
+  "comparator": "uncertainty",
+  "metric": "mean_region_rmse",
+  "echo_final": {
+    "n_obs": 20.0,
+    "function_recovery_rmse": 0.5543817312479181,
+    "prediction_error": 0.5543817312479181,
+    "prediction_mae": 0.39762041438113305,
+    "parameter_recovery_rmse": 1.1375298941641157,
+    "parameter_recovery_l2": 2.2750597883282313,
+    "mean_predictive_std": 0.45615360092794077,
+    "probe_entropy": -216.51507450405924,
+    "hypothesis_entropy": NaN,
+    "correct_hypothesis_prob": NaN,
+    "hypothesis_identified": NaN,
+    "leading_hypothesis_correct": NaN,
+    "structural_hamming_distance": NaN,
+    "parent_set_f1": NaN,
+    "region_coverage": 1.0,
+    "mean_region_rmse": 0.542394630075934,
+    "anomaly_hit_rate": NaN,
+    "anomaly_recall": NaN,
+    "total_cost": 20.0,
+    "cost_efficiency_rmse": 0.027719086562395905,
+    "discovery_efficiency_rmse": 0.027719086562395905
+  },
+  "comparator_final": {
+    "n_obs": 20.0,
+    "function_recovery_rmse": 0.6033171788380903,
+    "prediction_error": 0.6033171788380903,
+    "prediction_mae": 0.42509925174931296,
+    "parameter_recovery_rmse": 1.106584136755785,
+    "parameter_recovery_l2": 2.21316827351157,
+    "mean_predictive_std": 0.5086519371589092,
+    "probe_entropy": -228.09365697851027,
+    "hypothesis_entropy": NaN,
+    "correct_hypothesis_prob": NaN,
+    "hypothesis_identified": NaN,
+    "leading_hypothesis_correct": NaN,
+    "structural_hamming_distance": NaN,
+    "parent_set_f1": NaN,
+    "region_coverage": 1.0,
+    "mean_region_rmse": 0.5385662320239694,
+    "anomaly_hit_rate": NaN,
+    "anomaly_recall": NaN,
+    "total_cost": 20.0,
+    "cost_efficiency_rmse": 0.030165858941904516,
+    "discovery_efficiency_rmse": 0.030165858941904516
+  },
+  "echo_sequence": [
+    {
+      "step": 1,
+      "index": 1499,
+      "x": [
+        1.9709468030830242,
+        -0.7016801582831831
+      ],
+      "y": -0.9418468696993324,
+      "cost": 1.0,
+      "phase": "init",
+      "acquisition_score": null
+    },
+    {
+      "step": 2,
+      "index": 1310,
+      "x": [
+        -1.6698973431430137,
+        1.6797687530821914
+      ],
+      "y": -1.7305686983947397,
+      "cost": 1.0,
+      "phase": "init",
+      "acquisition_score": null
+    },
+    {
+      "step": 3,
+      "index": 312,
+      "x": [
+        1.525942623566082,
+        -0.6351184658944171
+      ],
+      "y": -0.02668149561269842,
+      "cost": 1.0,
+      "phase": "init",
+      "acquisition_score": null
+    },
+    {
+      "step": 4,
+      "index": 1235,
+      "x": [
+        1.546634221890888,
+        -1.8422491260151763
+      ],
+      "y": -0.37057349082258384,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 0.0005001147427551529
+    },
+    {
+      "step": 5,
+      "index": 1266,
+      "x": [
+        -1.8587116948935232,
+        -0.8953233349906786
+      ],
+      "y": -4.511148783670001,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 0.000558997861579847
+    },
+    {
+      "step": 6,
+      "index": 992,
+      "x": [
+        1.8024411452109121,
+        1.9775911486655193
+      ],
+      "y": 0.1543122112943335,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 1.1502260380690372
+    },
+    {
+      "step": 7,
+      "index": 1835,
+      "x": [
+        -0.33435388585262293,
+        -1.9811526239164121
+      ],
+      "y": 1.1342417552211308,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 0.8141952297414995
+    },
+    {
+      "step": 8,
+      "index": 610,
+      "x": [
+        -0.21066068894484724,
+        -0.33318314696854934
+      ],
+      "y": 0.2276133833157354,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.525955110639245
+    },
+    {
+      "step": 9,
+      "index": 776,
+      "x": [
+        0.05572781145451433,
+        1.4658638817713356
+      ],
+      "y": -0.5755347895991297,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.4585463941375645
+    },
+    {
+      "step": 10,
+      "index": 1305,
+      "x": [
+        -1.7983830576215452,
+        -1.9258168056309777
+      ],
+      "y": -5.535754155476653,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.080206074932797
+    },
+    {
+      "step": 11,
+      "index": 936,
+      "x": [
+        1.2249193114313721,
+        0.8246217788214727
+      ],
+      "y": 0.862824447164679,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.338077244715673
+    },
+    {
+      "step": 12,
+      "index": 187,
+      "x": [
+        -1.5259131121985257,
+        0.47270030627152826
+      ],
+      "y": -2.5722535919759895,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.084297514157465
+    },
+    {
+      "step": 13,
+      "index": 627,
+      "x": [
+        -0.7066261472533313,
+        1.9994074693922506
+      ],
+      "y": 0.6140327423789637,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 4.491090024296488
+    },
+    {
+      "step": 14,
+      "index": 134,
+      "x": [
+        0.5339304138493874,
+        -1.4814937559639247
+      ],
+      "y": 0.8631626874398547,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.022405562801527
+    },
+    {
+      "step": 15,
+      "index": 172,
+      "x": [
+        -0.8983330392855975,
+        -1.064694979451883
+      ],
+      "y": -2.7728876179289057,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 5.007269190599398
+    },
+    {
+      "step": 16,
+      "index": 1768,
+      "x": [
+        1.9792978791307667,
+        0.7722299506093897
+      ],
+      "y": -0.626538568890511,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 0.4441456781293907
+    },
+    {
+      "step": 17,
+      "index": 1102,
+      "x": [
+        -1.9674833120445756,
+        1.9811395693064542
+      ],
+      "y": -1.7969412290218685,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 0.3927507407424724
+    },
+    {
+      "step": 18,
+      "index": 496,
+      "x": [
+        -0.46603623368872604,
+        0.5808081885225445
+      ],
+      "y": -0.051882051849408944,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 4.956064101525468
+    },
+    {
+      "step": 19,
+      "index": 635,
+      "x": [
+        0.5178990986381802,
+        0.36956746853746125
+      ],
+      "y": 0.0764543742090843,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 4.668483632474857
+    },
+    {
+      "step": 20,
+      "index": 622,
+      "x": [
+        1.9557619825756758,
+        -1.9490741017485913
+      ],
+      "y": -1.3282713395464016,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 0.38968983229585175
+    }
+  ],
+  "note": "ECHO underperformed on the recorded metric without a simple geometric signature. Hidden law for evaluation: piecewise: 2*x1+x2 | x1^2-0.5*x2 | sin(2*x1)+0.3*x2."
+}

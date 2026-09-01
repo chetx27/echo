@@ -45,7 +45,7 @@ def recover_parents_bic(
     Intervened nodes are given empty parent sets because the evaluator
     knows the experimental protocol (hard do() on those variables).
     """
-    if len(observations) < 6:
+    if len(observations) < 3:
         return {node: set() for node in nodes}
     data = {node: np.asarray([row[node] for row in observations], dtype=float) for node in nodes}
     parents: Dict[str, Set[str]] = {}
