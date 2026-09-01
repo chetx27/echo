@@ -60,7 +60,7 @@ def evaluate_belief(
         from echo.evaluation.causal import parent_set_f1, recover_parents_bic, structural_hamming_distance
 
         obs = ground_truth.get("system_observations") or []
-        if len(obs) >= 6:
+        if len(obs) >= 3:
             pred = recover_parents_bic(
                 obs, intervened=tuple(ground_truth.get("intervened_nodes") or ())
             )

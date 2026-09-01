@@ -51,6 +51,23 @@ class RunResult:
             "hyperparameters": self.hyperparameters,
         }
 
+    @classmethod
+    def from_dict(cls, payload: dict) -> "RunResult":
+        return cls(
+            run_id=str(payload["run_id"]),
+            environment=str(payload["environment"]),
+            algorithm=str(payload["algorithm"]),
+            seed=int(payload["seed"]),
+            config_hash=str(payload["config_hash"]),
+            metrics=list(payload.get("metrics") or []),
+            sequence=list(payload.get("sequence") or []),
+            final_metrics=dict(payload.get("final_metrics") or {}),
+            hyperparameters=list(payload.get("hyperparameters") or []),
+            n_candidates=int(payload.get("n_candidates") or 0),
+            budget=int(payload.get("budget") or 0),
+            noise=float(payload.get("noise") or 0.0),
+        )
+
 
 def run_sequential(
     env: ScientificEnvironment,
@@ -189,8 +206,11 @@ def _maybe_belief(env, noise: float, X: np.ndarray, y: np.ndarray):
     getter = getattr(env, "get_candidate_hypotheses", None)
     if getter is None:
         return None
+    hypotheses = getter()
+    if not hypotheses:
+        return None
     from echo.hypotheses.belief import HypothesisBelief
 
-    belief = HypothesisBelief(getter(), noise_std=noise)
+    belief = HypothesisBelief(hypotheses, noise_std=noise)
     belief.fit(X, y)
     return belief

@@ -1,4 +1,4 @@
-# Literature review (Phase 0, incomplete)
+# Literature review (working bibliography)
 
 This file is a working review, not a claim of completeness. Novelty is **not** established. Do not write "nobody has done this before."
 
@@ -50,7 +50,7 @@ See `docs/literature/` for structured notes. Added for V1: Box & Hill (1967), Th
 3. Does global entropy reduction recover mechanisms better than optimum-seeking (EI)?
 4. When do these objectives disagree?
 
-Hypothesis-aware policies and cost wrappers are implemented; their experimental claims wait on experiments 2–4 summaries. Causal, multimodal, anomaly, and unseen worlds are implemented; their claims wait on those summaries. Ocean data is still out of scope.
+Hypothesis-aware policies and cost wrappers are implemented; interpret them from experiment 2–4 summaries when those files exist. Causal, multimodal, anomaly, and unseen worlds are implemented; interpret them from their summaries. The laboratory API (`echo.lab`, `docs/using_echo.md`) is for plugging in a new function or table. Ocean data is still out of scope.
 
 ## Citation practice
 

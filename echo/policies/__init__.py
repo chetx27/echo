@@ -1,29 +1,49 @@
 from __future__ import annotations
 
+from typing import Callable
+
+from echo.policies.acquisition_policy import AcquisitionPolicy
 from echo.policies.base import Policy
+
+PolicyFactory = Callable[[], Policy]
+_CUSTOM_POLICIES: dict[str, PolicyFactory] = {}
 
 
 def available_algorithms() -> list[str]:
-    return sorted(
-        [
-            "random",
-            "greedy",
-            "uncertainty",
-            "diversity",
-            "expected_improvement",
-            "ucb",
-            "thompson",
-            "information_gain",
-            "echo_v0",
-            "echo_hypothesis",
-            "echo_falsify",
-            "echo_hypothesis_cost",
-            "echo_hypothesis_penalty",
-            "echo_no_hypothesis",
-            "echo_information_only",
-            "echo_no_sequential",
-        ]
-    )
+    builtin = [
+        "random",
+        "greedy",
+        "uncertainty",
+        "diversity",
+        "expected_improvement",
+        "ucb",
+        "thompson",
+        "information_gain",
+        "echo_v0",
+        "echo_hypothesis",
+        "echo_falsify",
+        "echo_hypothesis_cost",
+        "echo_hypothesis_penalty",
+        "echo_no_hypothesis",
+        "echo_information_only",
+        "echo_no_sequential",
+    ]
+    return sorted(set(builtin) | set(_CUSTOM_POLICIES))
+
+
+def register_policy(name: str, factory: PolicyFactory) -> str:
+    """Register a policy factory. ``factory`` must return a new Policy."""
+    _CUSTOM_POLICIES[str(name)] = factory
+    return str(name)
+
+
+def register_acquisition(name: str, score_fn) -> str:
+    """Register an acquisition function as a greedy-on-score policy."""
+
+    def factory(n: str = name, fn=score_fn):
+        return AcquisitionPolicy(n, fn)
+
+    return register_policy(name, factory)
 
 
 def make_policy(name: str) -> Policy:
@@ -72,6 +92,7 @@ def make_policy(name: str) -> Policy:
         ),
         "echo_no_sequential": lambda: OpenLoopPolicy("echo_no_sequential", echo_v0_score),
     }
+    policies.update(_CUSTOM_POLICIES)
     if name not in policies:
         known = ", ".join(available_algorithms())
         raise ValueError(f"unknown algorithm {name!r}; known: {known}")

@@ -76,8 +76,8 @@ _TASKS: dict[str, BenchTask] = {
         question="Does a policy visit and reconstruct three distinct mechanisms?",
         primary_metric="mean_region_rmse",
         higher_is_better=False,
-        config_path="configs/smoke_multimodal.yaml",
-        notes="Smoke-scale config until a dedicated 30-seed run exists.",
+        config_path="configs/experiment6_multimodal.yaml",
+        notes="Three piecewise mechanisms in x1. Diversity is an extra baseline.",
     ),
     "anomaly_box": BenchTask(
         name="anomaly_box",
@@ -85,8 +85,8 @@ _TASKS: dict[str, BenchTask] = {
         question="Does sequential design find a structured local violation of a linear law?",
         primary_metric="anomaly_recall",
         higher_is_better=True,
-        config_path="configs/smoke_anomaly.yaml",
-        notes="Smoke-scale config until a dedicated 30-seed run exists.",
+        config_path="configs/experiment7_anomaly.yaml",
+        notes="Compact +4 offset box. Primary metric is recall of queries inside the box.",
     ),
     "unseen_form": BenchTask(
         name="unseen_form",

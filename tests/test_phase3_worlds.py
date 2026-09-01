@@ -129,6 +129,8 @@ def test_bench_registry_lists_core_tasks() -> None:
         "cost_aware",
         "causal_roots",
         "unseen_form",
+        "multimodal_regions",
+        "anomaly_box",
     ):
         assert required in names
     task = get_task("causal_roots")

@@ -1,0 +1,28 @@
+name: experiment7_anomaly
+environment: anomaly
+question: When most of the domain is linear, does sequential design find a compact structured violation?
+algorithms:
+  - random
+  - uncertainty
+  - echo_v0
+n_candidates: 2000
+budget: 20
+n_init: 3
+noise: 0.1
+n_test: 400
+n_probe: 64
+domain_low: -2.0
+domain_high: 2.0
+n_seeds: 30
+seed_start: 0
+output_dir: results
+n_restarts: 1
+cost_mode: uniform
+primary_algorithm: echo_v0
+comparator: uncertainty
+failure_metric: anomaly_recall
+failure_higher_is_better: true
+plot_metrics:
+  - anomaly_recall
+  - anomaly_hit_rate
+  - function_recovery_rmse

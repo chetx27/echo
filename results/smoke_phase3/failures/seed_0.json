@@ -1,0 +1,127 @@
+{
+  "seed": 0,
+  "environment": "causal",
+  "comparator": "uncertainty",
+  "metric": "structural_hamming_distance",
+  "echo_final": {
+    "n_obs": 6.0,
+    "function_recovery_rmse": 0.24644136301052852,
+    "prediction_error": 0.24644136301052852,
+    "prediction_mae": 0.15724933476524758,
+    "parameter_recovery_rmse": 0.049213367658831324,
+    "parameter_recovery_l2": 0.06959821199317272,
+    "mean_predictive_std": 0.10772453887250148,
+    "probe_entropy": -47.31327554152974,
+    "hypothesis_entropy": NaN,
+    "correct_hypothesis_prob": NaN,
+    "hypothesis_identified": NaN,
+    "leading_hypothesis_correct": NaN,
+    "structural_hamming_distance": 3.0,
+    "parent_set_f1": 0.5714285714285715,
+    "region_coverage": NaN,
+    "mean_region_rmse": NaN,
+    "anomaly_hit_rate": NaN,
+    "anomaly_recall": NaN,
+    "total_cost": 6.0,
+    "cost_efficiency_rmse": 0.04107356050175475,
+    "discovery_efficiency_rmse": 0.04107356050175475
+  },
+  "comparator_final": {
+    "n_obs": 6.0,
+    "function_recovery_rmse": 0.158575107466891,
+    "prediction_error": 0.158575107466891,
+    "prediction_mae": 0.13897421032930296,
+    "parameter_recovery_rmse": 0.011907037968514564,
+    "parameter_recovery_l2": 0.016839094582764683,
+    "mean_predictive_std": 0.4244127431219047,
+    "probe_entropy": -21.09269524646278,
+    "hypothesis_entropy": NaN,
+    "correct_hypothesis_prob": NaN,
+    "hypothesis_identified": NaN,
+    "leading_hypothesis_correct": NaN,
+    "structural_hamming_distance": 1.0,
+    "parent_set_f1": 0.8571428571428571,
+    "region_coverage": NaN,
+    "mean_region_rmse": NaN,
+    "anomaly_hit_rate": NaN,
+    "anomaly_recall": NaN,
+    "total_cost": 6.0,
+    "cost_efficiency_rmse": 0.026429184577815165,
+    "discovery_efficiency_rmse": 0.026429184577815165
+  },
+  "echo_sequence": [
+    {
+      "step": 1,
+      "index": 41,
+      "x": [
+        0.11724864078708164,
+        1.14314280285523
+      ],
+      "y": 1.1458878589119006,
+      "cost": 1.0,
+      "phase": "init",
+      "acquisition_score": null
+    },
+    {
+      "step": 2,
+      "index": 71,
+      "x": [
+        1.39316483310024,
+        -1.418105847253873
+      ],
+      "y": 0.4611666038162805,
+      "cost": 1.0,
+      "phase": "init",
+      "acquisition_score": null
+    },
+    {
+      "step": 3,
+      "index": 76,
+      "x": [
+        -1.6854798513374405,
+        0.6104583053465538
+      ],
+      "y": -1.4523647381302711,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 1.43218598207566
+    },
+    {
+      "step": 4,
+      "index": 34,
+      "x": [
+        -0.5395593270206858,
+        -1.578018881719082
+      ],
+      "y": -2.091104021729704,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 1.641107926825065
+    },
+    {
+      "step": 5,
+      "index": 77,
+      "x": [
+        -0.9046036056017712,
+        0.8106082826391452
+      ],
+      "y": -0.35883728917369057,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 0.9627512066095714
+    },
+    {
+      "step": 6,
+      "index": 12,
+      "x": [
+        0.4615404459250154,
+        -0.46528978295246626
+      ],
+      "y": 0.1776810728640293,
+      "cost": 1.0,
+      "phase": "adaptive",
+      "acquisition_score": 4.707086860170458
+    }
+  ],
+  "note": "ECHO V0 ended with higher function RMSE (0.2464) than uncertainty (0.1586). Hidden law for evaluation: A->C->D, B->C; C=1.5A+1.2B, D=0.8C."
+}

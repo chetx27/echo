@@ -1,23 +1,42 @@
 cff-version: 1.2.0
-title: ECHO
-message: If you use this software, please cite it using these metadata.
+message: If you use ECHO, please cite this software record (CITATION.cff).
 type: software
+title: "ECHO: sequential experiment selection under uncertainty"
 abstract: >-
-  Research infrastructure for sequential experiment selection
-  under uncertainty and limited experimental budgets.
-  This is prototype software; it is not a published paper.
-license: MIT
-version: 0.1.0
-date-released: "2026-08-26"
-repository-code: ""
+  ECHO is research software for sequential experiment selection when a
+  scientific system is only partially understood and the experimental
+  budget is small. It compares acquisition policies on synthetic
+  (and user-supplied) hidden systems using paired seeds, multiple
+  discovery metrics, failure records, and evaluator-only ground truth.
+  No language model is used. This record cites the software. It is not
+  a peer-reviewed paper.
 authors:
-  - name: ECHO contributors
+  - family-names: Chethana
+    given-names: G.
+    email: chethana.workspace@gmail.com
+    alias: chetx27
+    website: "https://github.com/chetx27"
+repository-code: "https://github.com/chetx27/echo"
+url: "https://github.com/chetx27/echo"
+license: MIT
+version: 0.2.0
+date-released: "2026-09-01"
+keywords:
+  - sequential experimental design
+  - Bayesian experimental design
+  - active learning
+  - Gaussian processes
+  - scientific discovery
+  - hypothesis discrimination
 preferred-citation:
   type: software
-  title: "ECHO: sequential experiment selection for scientific discovery (prototype)"
+  title: "ECHO: sequential experiment selection under uncertainty"
   authors:
-    - name: ECHO contributors
+    - family-names: Chethana
+      given-names: G.
   year: 2026
+  version: 0.2.0
+  url: "https://github.com/chetx27/echo"
   notes: >-
-    No peer-reviewed publication exists yet. Cite the software version
-    used. Update this file when a preprint or paper is available.
+    Cite this software version. No peer-reviewed publication exists yet.
+    Update this file when a preprint or paper is available.
