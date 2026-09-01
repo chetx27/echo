@@ -5,11 +5,11 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "echo-discovery"
 version = "0.2.0"
-description = "Research infrastructure for sequential experiment selection under uncertainty."
+description = "Sequential experiment selection under uncertainty and limited experimental budgets."
 readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}
-authors = [{name = "ECHO contributors"}]
+authors = [{name = "Chethana G", email = "chethana.workspace@gmail.com"}]
 keywords = [
   "experimental design",
   "active learning",
@@ -32,7 +32,9 @@ dev = ["pytest>=7.0"]
 echolab = "echo.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/"
+Homepage = "https://github.com/chetx27/echo"
+Repository = "https://github.com/chetx27/echo"
+Issues = "https://github.com/chetx27/echo/issues"
 
 [tool.setuptools.packages.find]
 include = ["echo*", "baselines*"]
