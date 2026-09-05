@@ -17,8 +17,6 @@ It is research software, not a product and not an autonomous scientist. Policies
 experiment  →  observation  →  belief update  →  next experiment
 ```
 
----
-
 ## Why it exists
 
 Accuracy on a held-out set, a single benchmark score, or Bayesian optimization of a scalar do not automatically answer a scientific design question. ECHO isolates that question: under a **fixed budget**, which sequential policy recovers a hidden mechanism — and where does it fail?
@@ -32,8 +30,6 @@ The same loop runs on built-in synthetic worlds or on **your** function / CSV ta
 | Optional custom acquisition | RMSE, \(P(H_{\mathrm{true}})\), SHD, coverage, cost, failures, figures, LaTeX |
 
 Full laboratory guide: [`docs/using_echo.md`](docs/using_echo.md).
-
----
 
 ## Install
 
@@ -49,8 +45,6 @@ pytest
 ```
 
 Requires Python 3.9+ · NumPy · SciPy · scikit-learn · Matplotlib · PyYAML.
-
----
 
 ## Thirty-second example
 
@@ -80,8 +74,6 @@ python -m echo bench
 
 Outputs (per run): `results/<name>/summary.json`, `metrics.csv`, `table.tex`, `report.md`, `failures/`, and figures under `figures/<name>/`. Interrupted runs **resume**. `--jobs N` parallelizes seeds.
 
----
-
 ## Method, in one page
 
 1. **Worlds.** Hidden synthetic laws, a Python callable, or a CSV lookup table. Candidates are finite. Noise is seed-paired so two policies querying the same index see the same \(y\).
@@ -91,8 +83,6 @@ Outputs (per run): `results/<name>/summary.json`, `metrics.csv`, `table.tex`, `r
 5. **Claims protocol.** Pre-specified question, paired Wilcoxon tests, 95% CIs, seed-level failure files. `summary.json` is the record; prose reports copy it.
 
 No language model is used at any layer.
-
----
 
 ## Built-in worlds and tasks
 
@@ -110,8 +100,6 @@ No language model is used at any layer.
 `python -m echo list environments` · `python -m echo list algorithms` · `python -m echo bench`
 
 ECHO-Bench is a **local task index**, not a community leaderboard.
-
----
 
 ## Results snapshot (30 seeds)
 
@@ -137,8 +125,6 @@ python -m echo analyze --run results/first_experiment
 
 Smoke (CI, not claims): `configs/smoke.yaml`, `configs/smoke_hypotheses.yaml`.
 
----
-
 ## Documentation
 
 | Document | Contents |
@@ -151,8 +137,6 @@ Smoke (CI, not claims): `configs/smoke.yaml`, `configs/smoke_hypotheses.yaml`.
 | [`docs/literature_review.md`](docs/literature_review.md) | Working bibliography |
 | [`docs/decisions/`](docs/decisions/) | Design decisions |
 | [`papers/draft/`](papers/draft/) | No manuscript yet — do not invent one |
-
----
 
 ## Scope
 
@@ -184,8 +168,6 @@ There is no paper yet. Cite **software version 0.2.0**. Metadata: [`CITATION.cff
 **APA**
 
 Chethana, G. (2026). *ECHO: sequential experiment selection under uncertainty* (Version 0.2.0) [Computer software]. https://github.com/chetx27/echo
-
----
 
 ## License
 
