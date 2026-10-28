@@ -171,4 +171,5 @@ Chethana, G. (2026). *ECHO: sequential experiment selection under uncertainty* (
 
 ## License
 
-MIT. See [`LICENSE`](LICENSE).
+MIT. 
+See [`LICENSE`](LICENSE).
