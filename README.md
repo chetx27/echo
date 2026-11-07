@@ -167,7 +167,7 @@ There is no paper yet. Cite **software version 0.2.0**. Metadata: [`CITATION.cff
 
 **APA**
 
-Chethana, G. (2026). *ECHO: sequential experiment selection under uncertainty* (Version 0.2.0) [Computer software]. https://github.com/chetx27/echo
+chethana *ECHO: sequential experiment selection under uncertainty* (Version 0.2.0) [Computer software]. https://github.com/chetx27/echo
 
 ## License
 
